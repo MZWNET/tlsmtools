@@ -4,14 +4,12 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 )
 
 // mergeFiles merges the orig, alt, and text files into a single tl file
 // with the specified formatting, ensuring that each nth line from each file
 // corresponds to the same block in the output file.
-func mergeFiles(origFilename, altFilename, textFilename string) error {
-	tlFilename := strings.TrimSuffix(origFilename, ".orig")
+func mergeFiles(origFilename, altFilename, textFilename, tlFilename string) error {
 	tlFile, err := os.Create(tlFilename)
 	if err != nil {
 		return fmt.Errorf("error creating file %s: %v", tlFilename, err)

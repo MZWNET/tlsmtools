@@ -24,6 +24,12 @@ func main() {
 						Usage:    "File to split",
 						Required: true,
 					},
+					&cli.StringFlag{
+						Name:    "outputDir",
+						Aliases: []string{"d"},
+						Usage:   "Directory to save the split files",
+						Value:   ".",
+					},
 				},
 			},
 			{
@@ -34,21 +40,24 @@ func main() {
 				Flags: []cli.Flag{
 					&cli.StringFlag{
 						Name:     "orig",
-						Aliases:  []string{"o"},
-						Usage:    "Original file",
+						Usage:    "orig file",
 						Required: true,
 					},
 					&cli.StringFlag{
 						Name:     "alt",
-						Aliases:  []string{"a"},
-						Usage:    "Alternate file",
+						Usage:    "alt file",
 						Required: true,
 					},
 					&cli.StringFlag{
 						Name:     "text",
-						Aliases:  []string{"t"},
-						Usage:    "Text file",
+						Usage:    "text file",
 						Required: true,
+					},
+					&cli.StringFlag{
+						Name:    "output",
+						Aliases: []string{"o"},
+						Usage:   "Output file name and path",
+						Value:   "output.tl",
 					},
 				},
 			},
@@ -63,12 +72,14 @@ func main() {
 
 func splitFile(c *cli.Context) error {
 	filename := c.String("file")
-	return splitFileImpl(filename)
+	outputDir := c.String("outputDir")
+	return splitFileImpl(filename, outputDir)
 }
 
 func mergeAction(c *cli.Context) error {
 	origFile := c.String("orig")
 	altFile := c.String("alt")
 	textFile := c.String("text")
-	return mergeFiles(origFile, altFile, textFile)
+	outputFile := c.String("output")
+	return mergeFiles(origFile, altFile, textFile, outputFile)
 }

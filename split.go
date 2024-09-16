@@ -4,13 +4,19 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
 // splitFileImpl is the actual implementation of the split functionality.
-func splitFileImpl(filename string) error {
-	origFilename := fmt.Sprintf("%s.orig", filename)
-	altFilename := fmt.Sprintf("%s.alt", filename)
+func splitFileImpl(filename string, outputDir string) error {
+	origFilename := filepath.Join(outputDir, fmt.Sprintf("%s.orig", filepath.Base(filename)))
+	altFilename := filepath.Join(outputDir, fmt.Sprintf("%s.alt", filepath.Base(filename)))
+
+	// Ensure output directory exists
+	if err := os.MkdirAll(outputDir, 0755); err != nil {
+		return fmt.Errorf("error creating directory %s: %v", outputDir, err)
+	}
 
 	origFile, err := os.Create(origFilename)
 	if err != nil {
