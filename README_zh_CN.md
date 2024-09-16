@@ -1,5 +1,7 @@
 # tlsmtools - TL文件分割与合并工具
 
+[English](README.md) | 简体中文
+
 `tlsmtools` 是一个简单的命令行工具，用于分割和合并TL文件。
 
 ## 功能

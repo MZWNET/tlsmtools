@@ -1,5 +1,7 @@
 # tlsmtools - TL File Splitting and Merging Tools
 
+English | [简体中文](README_zh_CN.md)
+
 `tlsmtools` is a simple command-line utility designed to split and merge TL files.
 
 ## Features
